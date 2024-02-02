@@ -1,0 +1,15 @@
+<h1>Search Results</h1>
+<p id="notice"><%= notice %></p>
+<h1>Airports</h1>
+
+<% @recommended_flight.each do |flight| %>
+  <tr>
+    <td><b>ID:</b> <%= flight.id %></td><br>
+    <td><b>Departure Airport: </b><%= flight.departure_airport.name %></td><br>
+    <td><b>Arrival Airport: </b><%= flight.arrival_airport.name %></td><br>
+    <td><b>Start:</b> <%= flight.start %></td><br>
+    <td><b>Flight Duration: </b><%= flight.flight_duration %> hours</td><br>
+    <%= link_to "View", flights_show_path %>
+    <!-- Add more columns as needed -->
+  </tr>
+<% end %>

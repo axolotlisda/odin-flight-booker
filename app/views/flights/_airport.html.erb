@@ -1,0 +1,11 @@
+<tbody>
+  <% if @airports.present? %>
+  <% @airports.each do |airport| %>
+    <tr>
+      <td><%= airport.name %></td>
+      <td><%= airport.code %></td>
+    </tr>
+  <% end %>
+  <% end %>
+</tbody>
+<br/>

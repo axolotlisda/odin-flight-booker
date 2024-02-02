@@ -1,0 +1,49 @@
+<div class="mar">
+</div>
+
+
+<%= form_tag(flights_path, method: :get) do %>
+
+<%= select_tag :departure_code,
+options_for_select(@departure_airport,
+params[:departure_code]),
+prompt: 'Select Departure Airport' %>
+  
+<%= select_tag :arrival_code,
+options_for_select(@arrival_airport,
+params[:arrival_code]),
+prompt: 'Select Arrival Airport' %>
+
+<%= select_tag :date,
+options_for_select(Flight.pluck(:start),
+params[:date]),
+prompt: 'Select Date' %>
+
+
+<h3>Number of Passengers</h3>
+<%= number_field_tag :num_tickets,
+params[:num_tickets],
+in: 1..4,
+placeholder: 'num' %>
+<%= submit_tag 'Search Flights' %>
+<% end %>
+
+
+<h1>Choose a Flight</h1>
+
+<% if @recommended_flight.present? %>
+    <h1>Recommended Flights</h1>
+        <% @recommended_flight.each do |flight| %>
+          <tr>
+            <td><%= radio_button_tag 'selected_flight_id', flight.id %></td>    
+            <td><b>ID:</b> <%= flight.id %></td><br>
+            <td><b>Departure Airport: </b><%= flight.departure_airport.name %></td><br>
+            <td><b>Arrival Airport: </b><%= flight.arrival_airport.name %></td><br>
+            <td><b>Start:</b> <%= flight.start %></td><br>
+            <td><b>Flight Duration: </b><%= flight.flight_duration %> hours</td><br>
+            <!-- Add more columns as needed -->
+          </tr>
+        <% end %>
+<% else %>
+<h4>Your Recommended Flight will be displayed here :)</h4>
+<% end %>

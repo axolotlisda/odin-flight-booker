@@ -1,9 +1,13 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Clear existing data
+Flight.destroy_all
+
+flights_data = [
+  { departure_airport: Airport.find_by(code: 'SFO'), arrival_airport: Airport.find_by(code: 'JFK'), start: DateTime.now, flight_duration: 6 },
+  { departure_airport: Airport.find_by(code: 'LAX'), arrival_airport: Airport.find_by(code: 'ORD'), start: DateTime.now, flight_duration: 4 },
+  { departure_airport: Airport.find_by(code: 'ATL'), arrival_airport: Airport.find_by(code: 'CDG'), start: DateTime.now, flight_duration: 9 },
+  # Add more flights as needed
+]
+
+flights_data.each do |flight_data|
+  Flight.create!(flight_data)
+end

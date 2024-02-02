@@ -7,4 +7,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  root "flights#index"
+
+  get '/search', to: "flights#search"
+
+  get 'flights/new', to: "flights#new"
+
+  get 'flights', to: "flights#index"
+
+  post '/flights', to: "flights#create"
+
+  get 'flights/show', to: "flights#show"
+
+  resources :flights do
+    collection do
+      get :searching
+    end
+  end
+
 end

@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <%= form_tag("/search", method: "get") do %>
+      <%= text_field_tag(:key, nil, placeholder: "Search") %>
+      <%= submit_tag "Submit" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
