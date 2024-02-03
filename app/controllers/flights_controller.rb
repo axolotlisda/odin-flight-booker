@@ -14,7 +14,7 @@ class FlightsController < ApplicationController
     d_c = params[:departure_code]
     d_id = Airport.where(name: d_c).pluck(:id)
 
-    @recommended_flight = Flight.where(arrival_airport_id: a_id, departure_airport_id: d_id)
+    @recommended_flight = Flight.where(arrival_airport_id: a_id ,departure_airport_id: d_id, start: datess)
 
   end
 

@@ -31,19 +31,37 @@ placeholder: 'num' %>
 
 <h1>Choose a Flight</h1>
 
-<% if @recommended_flight.present? %>
-    <h1>Recommended Flights</h1>
+<%= form_tag(new_booking_path, method: :get) do %>
+  <%= hidden_field_tag :num_tickets, params[:num_tickets] %>
+
+  <% if @recommended_flight.present? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>ID</th>
+          <th>Departure Airport ID</th>
+          <th>Arrival Airport ID</th>
+          <th>Start</th>
+          <th>Flight Duration</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @recommended_flight.each do |flight| %>
           <tr>
-            <td><%= radio_button_tag 'selected_flight_id', flight.id %></td>    
-            <td><b>ID:</b> <%= flight.id %></td><br>
-            <td><b>Departure Airport: </b><%= flight.departure_airport.name %></td><br>
-            <td><b>Arrival Airport: </b><%= flight.arrival_airport.name %></td><br>
-            <td><b>Start:</b> <%= flight.start %></td><br>
-            <td><b>Flight Duration: </b><%= flight.flight_duration %> hours</td><br>
-            <!-- Add more columns as needed -->
+            <td><%= radio_button_tag 'selected_flight_id', flight.id %></td>
+            <td><%= flight.id %></td>
+            <td><%= flight.departure_airport_id %></td>
+            <td><%= flight.arrival_airport_id %></td>
+            <td><%= flight.start %></td>
+            <td><%= flight.flight_duration %></td>
           </tr>
         <% end %>
-<% else %>
-<h4>Your Recommended Flight will be displayed here :)</h4>
+      </tbody>
+    </table>
+
+    <%= submit_tag 'Proceed to Booking' %>
+  <% else %>
+    <p>No recommended flights found.</p>
+  <% end %>
 <% end %>
